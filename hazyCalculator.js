@@ -3,16 +3,16 @@ function isSkippedValue(value) {
 }
 
 function isNumericValue(value) {
-  return !isNaN(value)
+  return !isNaN(value) && value !== ''
 }
 
 function isNothingValue(value) {
-  return value === null
+  return value == null
 }
 
 function isAcceptableValue(value) {
   const operators = ['+', '-', '*', '/']
-  return typeof value === Number || operators.includes(value)
+  return typeof Number(value) === 'number' || operators.includes(value)
 }
 
 function performCalculationStep(firstOperand, operator, secondOperand) {
@@ -31,10 +31,10 @@ function performCalculationStep(firstOperand, operator, secondOperand) {
 }
 
 function calculate(calculationSteps) {
-  let total
+  let total 
   let operator
 
-  calculationSteps.forEach(nextCalculationStep => {
+  calculationSteps.forEach( (nextCalculationStep) => {
     if (!isAcceptableValue(nextCalculationStep)) {
       throw new Error('Invalid input!')
     }
